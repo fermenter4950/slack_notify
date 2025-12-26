@@ -12,20 +12,30 @@ Pythonコードの任意の場所からSlackへ通知を送信できるシンプ
 
 ### 1. Webhook URLの取得
 
-1. Slackワークスペースの **Incoming Webhook** 設定ページを開く
-   - `https://<ワークスペース名>.slack.com/marketplace/new/A0F7XDUAZ--incoming-webhook-`
-2. **Slackに追加** をクリック
+1. https://slack.com/services/new/incoming-webhook を開く
+2. ワークスペースを選択してサインイン
 3. 通知を送信するチャンネルを選択
 4. **Incoming Webhook インテグレーションの追加** をクリック
 5. 表示された **Webhook URL** をコピー
 
-### 2. 環境変数の設定
+### 2. インストール
+
+```bash
+cd /path/to/slackNotice
+pip install -e .
+```
+
+**Mac (Homebrew) の場合**:
+```bash
+pip install --user --break-system-packages -e .
+```
+
+### 3. 環境変数の設定
 
 `.bashrc` または `.zshrc` に以下を追加：
 
 ```bash
 export SLACK_WEBHOOK_URL='https://hooks.slack.com/services/...'
-export PYTHONPATH="${PYTHONPATH}:/path/to/slackNotice"
 ```
 
 設定を反映：
