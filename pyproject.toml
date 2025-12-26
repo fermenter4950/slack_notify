@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "slack-notice"
+version = "1.0.0"
+description = "Slackへ簡単に通知を送信できるモジュール"
+requires-python = ">=3.6"
+
+[tool.setuptools]
+py-modules = ["slack_notice"]
+
