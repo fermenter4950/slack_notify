@@ -79,6 +79,37 @@ python slack_notice.py "テスト通知"
 | `username` | str | 表示名 |
 | `icon_emoji` | str | アイコン絵文字（例: `:bell:`） |
 
+### `SlackNotifier(bot_token=None, channel=None, webhook_url=None, load_env=True)`
+
+トークン等を明示的に渡して使うクラスです。省略した項目は環境変数（利用側プロジェクトの `.env` を含む）から補完されます。
+`notify()` / `send_csv()` は、このクラスのメソッドを呼ぶショートカットです。
+
+```python
+from slack_notice import SlackNotifier
+
+slack = SlackNotifier(bot_token="xoxb-...", channel="C0123456789")
+slack.send_csv("result.csv", message="集計結果です")
+```
+
+### `send_csv(file_path, channel=None, message=None, title=None)`
+
+CSVファイルをSlackにアップロードします。Webhookではファイルを送れないため、
+Botトークン（`files:write` スコープ）が必要です。Botは送信先チャンネルに招待してください。
+
+```bash
+export SLACK_BOT_TOKEN='xoxb-...'
+export SLACK_CHANNEL_ID='C0123456789'   # 送信先チャンネルID
+```
+
+```python
+from slack_notice import send_csv
+send_csv("result.csv", message="集計結果です")
+```
+
+```bash
+python slack_notice.py --csv result.csv "集計結果です"
+```
+
 ## 動作環境
 
 - Python 3.6以上
